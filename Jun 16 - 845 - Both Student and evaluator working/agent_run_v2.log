@@ -1,0 +1,465 @@
+2025-06-16 08:34:42,533 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:34:42,572 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:34:42,574 - ResearchAgentV2 - INFO - Loading LLMs and Embeddings...
+2025-06-16 08:34:42,586 - ResearchAgentV2 - INFO - LLMs and Embeddings loaded successfully.
+2025-06-16 08:34:42,587 - ResearchAgentV2 - INFO - Loading prompts from prompts.yaml
+2025-06-16 08:34:42,590 - ResearchAgentV2 - INFO - Prompts loaded successfully.
+2025-06-16 08:34:52,559 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:34:52,559 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:03,194 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:03,195 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:06,624 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:06,626 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:06,634 - ResearchAgentV2 - INFO - Processing 20 uploaded files...
+2025-06-16 08:35:10,350 - ResearchAgentV2 - INFO - Knowledge base created successfully with 20 documents.
+2025-06-16 08:35:15,290 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:15,291 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:15,296 - ResearchAgentV2 - INFO - Starting PLANNING phase for prompt: **Primary Goal:** Produce a formal, technical research report that documents the complete conceptual
+2025-06-16 08:35:15,309 - ResearchAgentV2 - DEBUG - Node: retrieve_context
+2025-06-16 08:35:15,627 - ResearchAgentV2 - DEBUG - Retrieved 4 documents.
+2025-06-16 08:35:15,628 - ResearchAgentV2 - DEBUG - Node: generate_plan
+2025-06-16 08:35:23,718 - ResearchAgentV2 - DEBUG - LLM Raw Plan Response:
+```json
+{
+  "title": "Evolution of an Agentic Architecture: From Basic RAG to Professional-Grade Tool-Augmented Auditing",
+  "plan_items": [
+    {
+      "section_id": "1.0",
+      "title": "Introduction",
+      "description": "This section will provide a brief overview of the agentic system's development goals and the report's structure."
+    },
+    {
+      "section_id": "2.0",
+      "title": "Early Architectures (v2-v6): The Foundation of Retrieval-Augmented Generation and Agentic Loops",
+      "description": "This section will cover the initial stages of the system's development, focusing on the core concepts of RAG and the introduction of basic agentic loops."
+    },
+    {
+      "section_id": "3.0",
+      "title": "The Constitutional Multi-Agent System (v7-v9): Introducing Shared Governance and Explicit State",
+      "description": "This section will detail the introduction of the 'Shared Constitution' and the evolution towards a multi-agent system with explicit state management."
+    },
+    {
+      "section_id": "4.0",
+      "title": "The State-Passing & Design-Specification Workflow (v10-v12): Ensuring Contextual Continuity and Reproducibility",
+      "description": "This section will explain the implementation of sequential state-passing between agents and the development of a design-specification driven workflow."
+    },
+    {
+      "section_id": "5.0",
+      "title": "The Plan-Synthesize-Evaluate Framework (v13-v16): Establishing a Robust Development Loop",
+      "description": "This section will analyze the transition to the Plan-Synthesize-Evaluate framework and its iterative refinement."
+    },
+    {
+      "section_id": "6.0",
+      "title": "The Professional-Grade Teacher-Student Model (v17-v18): Implementing Tool-Augmented Auditing and Structured State",
+      "description": "This section will delve into the final architectural evolution, focusing on the Teacher-Student model, Tool-Augmented Auditing, and Structured JSON State Exchange."
+    },
+    {
+      "section_id": "7.0",
+      "title": "Conclusion: Detailed Synthesis of the v18 Architecture",
+      "description": "This section will provide a comprehensive synthesis of the final v18 architecture, meticulously detailing the interaction between Tool-Augmented Auditing and Structured JSON State Exchange within the Teacher-Student model."
+    }
+  ]
+}
+```
+2025-06-16 08:35:23,719 - ResearchAgentV2 - DEBUG - Successfully parsed plan JSON.
+2025-06-16 08:35:23,819 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:23,820 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:29,230 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:29,231 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:29,233 - ResearchAgentV2 - INFO - Plan approved. Moving to SYNTHESIS.
+2025-06-16 08:35:29,332 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:35:29,332 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:35:29,334 - ResearchAgentV2 - INFO - Starting SYNTHESIS phase.
+2025-06-16 08:35:29,336 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 1.0
+2025-06-16 08:35:33,791 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 2.0
+2025-06-16 08:35:38,756 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 3.0
+2025-06-16 08:35:46,242 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 4.0
+2025-06-16 08:35:52,694 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 5.0
+2025-06-16 08:35:56,075 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 6.0
+2025-06-16 08:36:03,550 - ResearchAgentV2 - DEBUG - Node: execute_synthesis_step for section 7.0
+2025-06-16 08:36:10,512 - ResearchAgentV2 - DEBUG - Node: assemble_draft
+2025-06-16 08:36:10,512 - ResearchAgentV2 - INFO - SYNTHESIS phase complete.
+2025-06-16 08:36:10,607 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:36:10,608 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---
+2025-06-16 08:36:10,610 - ResearchAgentV2 - INFO - Starting EVALUATION phase.
+2025-06-16 08:36:10,613 - ResearchAgentV2 - DEBUG - --- Entering Evaluation Graph ---
+2025-06-16 08:36:10,613 - ResearchAgentV2 - DEBUG - Node: parse_claims_node on output (first 300 chars):
+## Introduction
+
+This report details the evolution of an agentic architecture, tracing its development from basic Retrieval-Augmented Generation (RAG) to a professional-grade system incorporating tool-augmented auditing and structured state exchange. The primary goal of this project is to create a r...
+2025-06-16 08:36:10,618 - ResearchAgentV2 - DEBUG - Found 32 potential claims to audit.
+2025-06-16 08:36:10,618 - ResearchAgentV2 - DEBUG - Node: generate_evaluation_node
+2025-06-16 08:36:10,618 - ResearchAgentV2 - DEBUG - Invoking evaluation LLM with tool-binding and direct-to-JSON instruction.
+2025-06-16 08:36:40,929 - ResearchAgentV2 - DEBUG - Raw response from evaluation LLM:
+```json
+{
+  "overall_consistency_score": 0.9,
+  "consistency_notes": "The report demonstrates a good logical flow, presenting the evolution of the agentic system in a clear and chronological manner. Each section builds upon the previous one, providing a coherent narrative of the system's development.  The report effectively uses transitions and summaries to maintain clarity and guide the reader through the different stages of the architecture's evolution.  Minor improvements could be made in providing more context and details for versions 7-9 and 11-12, as these sections rely heavily on inferences drawn from adjacent versions.",
+  "goal_alignment_check": "PASS",
+  "goal_alignment_notes": "The report successfully fulfills the user's request by providing a comprehensive chronology of the agentic system's development from v2 to v18. It dedicates appropriate attention to the later, more complex architectures (v13-v18) and provides a detailed synthesis of the final v18 architecture in the conclusion. The report adheres to the requested structure, covering all specified architectural epochs.",
+  "citation_audit": [
+    {
+      "claim": "This report details the evolution of an agentic architecture, tracing its development from basic Retrieval-Augmented Generation (RAG) to a professional-grade system incorporating tool-augmented auditing and structured state exchange.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The system began with a simpler architecture, likely centered around a single agent interacting with a knowledge base.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Later versions, such as v4, introduced the concept of multi-path, stateful agents and a routing mechanism for dynamic task selection.",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "This suggests an evolution towards more complex agent behavior and the beginnings of structured state management, with state represented as a tuple containing elements like user prompt, retrieved documents, task mode, and output.",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "Version 10 introduces a \"Sequential, State-Passing Manager\" as the Supervisor",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This implies that versions 7-9 may have struggled with maintaining contextual continuity across different stages of the workflow.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "The v10 architecture explicitly addresses this by ensuring the output of each stage becomes the high-priority context for the next",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The concept of a \"Shared Constitution\"",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "moving beyond the simpler, potentially less coordinated interactions of earlier versions like v4, which focused on state transitions within a single agent",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "The evolution towards explicit state management is crucial for enabling the complex, sequential workflows envisioned in later versions, like the Plan-Synthesize-Evaluate loop",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Previously a simple task initiator, the Supervisor became a Sequential, State-Passing Manager.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This meant the Supervisor took on the responsibility of managing the state across the entire sequence of tasks (Research Report Generation, Code Implementation, and Technical Documentation).",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This sequential state-passing ensured that the output of each stage became the high-priority context for the subsequent stage. For example, the generated code from the Code Implementation stage would become the primary context for the Technical Documentation stage, guaranteeing contextual continuity and accuracy.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This addressed the prior issue where the agent's retrieval mechanism could be \"polluted\" by older, less relevant files in the knowledge base.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Later versions, such as v17, built upon this framework by introducing a Teacher-Student model with an independent auditor",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v17 architecture introduced a Teacher-Student model to address shortcomings of previous versions, such as noise amplification, redundant computation, lack of true independence, and misaligned incentives observed in earlier multi-agent designs",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This model simplified the agent structure and clarified the roles of individual components within the established Plan-Synthesize-Evaluate loop",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v17 architecture employed a \"Student\" agent (Planner/Synthesizer) responsible for generating plans and synthesizing artifacts, and a \"Teacher\" agent (Auditor/Evaluator) responsible for evaluating the Student's work",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "However, the v17 audit process, while improved, remained qualitative and susceptible to interpretation errors",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Version 18 further refined this model by incorporating Tool-Augmented Auditing and Structured JSON State Exchange",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The key improvement in v18 is the empowerment of the Auditor agent with a `citation_retriever` tool. This tool enables programmatic verification of claims against source documents, transforming the audit from a qualitative review into a verifiable, programmatic process",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This addresses the previous vulnerability of relying on the LLM to interpret and compare unstructured text for fact-checking",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Furthermore, v18 replaced the fragile Markdown-based state passing with structured JSON objects",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The Planning graph now produces `plan.json` and the Evaluation graph produces `evaluation.json`",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured state exchange ensures reliable, machine-readable data for the Supervisor's control flow, eliminating the brittleness of string parsing previously employed",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "These enhancements in v18 create a more robust, verifiable, and scalable agentic research system.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v18 architecture represents a significant advancement in creating a robust and verifiable agentic research system.  It builds upon the v17 Teacher-Student model by incorporating two key enhancements: Tool-Augmented Auditing and Structured JSON State Exchange.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The core of the v18 system revolves around the interaction between the Student and Teacher agents. The Student agent, a low-temperature LLM, is responsible for generating both the initial plan via the `planning_graph` and the cited artifact using the `synthesis_graph`.",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The Teacher agent, a low-temperature LLM from a different model family, then evaluates the Student's work.",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This evaluation is no longer a qualitative review as in previous versions, but a programmatic verification process.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This programmatic verification is achieved through Tool-Augmented Auditing.  Instead of simply comparing text for factual accuracy, the Auditor (Teacher) now uses a `citation_retriever` tool.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This tool allows the Auditor to directly access and verify claims against the original source documents, eliminating the potential for interpretation errors and hallucinations that plagued earlier versions.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Further enhancing the robustness of the system is the use of Structured JSON State Exchange.  Communication between the different graphs (Planning, Synthesis, and Evaluation) now occurs through structured JSON objects (`plan.json` and `evaluation.json`).",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured data exchange replaces the previous reliance on unstructured Markdown files, eliminating the fragility of string parsing and ensuring reliable control flow for the Supervisor agent.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured approach contributes to the overall scalability and verifiability of the system.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    }
+  ]
+}
+```
+2025-06-16 08:36:40,930 - ResearchAgentV2 - DEBUG - Successfully parsed final evaluation JSON:
+{
+  "overall_consistency_score": 0.9,
+  "consistency_notes": "The report demonstrates a good logical flow, presenting the evolution of the agentic system in a clear and chronological manner. Each section builds upon the previous one, providing a coherent narrative of the system's development.  The report effectively uses transitions and summaries to maintain clarity and guide the reader through the different stages of the architecture's evolution.  Minor improvements could be made in providing more context and details for versions 7-9 and 11-12, as these sections rely heavily on inferences drawn from adjacent versions.",
+  "goal_alignment_check": "PASS",
+  "goal_alignment_notes": "The report successfully fulfills the user's request by providing a comprehensive chronology of the agentic system's development from v2 to v18. It dedicates appropriate attention to the later, more complex architectures (v13-v18) and provides a detailed synthesis of the final v18 architecture in the conclusion. The report adheres to the requested structure, covering all specified architectural epochs.",
+  "citation_audit": [
+    {
+      "claim": "This report details the evolution of an agentic architecture, tracing its development from basic Retrieval-Augmented Generation (RAG) to a professional-grade system incorporating tool-augmented auditing and structured state exchange.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The system began with a simpler architecture, likely centered around a single agent interacting with a knowledge base.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Later versions, such as v4, introduced the concept of multi-path, stateful agents and a routing mechanism for dynamic task selection.",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "This suggests an evolution towards more complex agent behavior and the beginnings of structured state management, with state represented as a tuple containing elements like user prompt, retrieved documents, task mode, and output.",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "Version 10 introduces a \"Sequential, State-Passing Manager\" as the Supervisor",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This implies that versions 7-9 may have struggled with maintaining contextual continuity across different stages of the workflow.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "The v10 architecture explicitly addresses this by ensuring the output of each stage becomes the high-priority context for the next",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The concept of a \"Shared Constitution\"",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "moving beyond the simpler, potentially less coordinated interactions of earlier versions like v4, which focused on state transitions within a single agent",
+      "citation_tag": "[Source: Technical Research Report v4.md]",
+      "verification_status": "FAIL"
+    },
+    {
+      "claim": "The evolution towards explicit state management is crucial for enabling the complex, sequential workflows envisioned in later versions, like the Plan-Synthesize-Evaluate loop",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Previously a simple task initiator, the Supervisor became a Sequential, State-Passing Manager.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This meant the Supervisor took on the responsibility of managing the state across the entire sequence of tasks (Research Report Generation, Code Implementation, and Technical Documentation).",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This sequential state-passing ensured that the output of each stage became the high-priority context for the subsequent stage. For example, the generated code from the Code Implementation stage would become the primary context for the Technical Documentation stage, guaranteeing contextual continuity and accuracy.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This addressed the prior issue where the agent's retrieval mechanism could be \"polluted\" by older, less relevant files in the knowledge base.",
+      "citation_tag": "[Source: Technical Research Report v10.md]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Later versions, such as v17, built upon this framework by introducing a Teacher-Student model with an independent auditor",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v17 architecture introduced a Teacher-Student model to address shortcomings of previous versions, such as noise amplification, redundant computation, lack of true independence, and misaligned incentives observed in earlier multi-agent designs",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This model simplified the agent structure and clarified the roles of individual components within the established Plan-Synthesize-Evaluate loop",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v17 architecture employed a \"Student\" agent (Planner/Synthesizer) responsible for generating plans and synthesizing artifacts, and a \"Teacher\" agent (Auditor/Evaluator) responsible for evaluating the Student's work",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "However, the v17 audit process, while improved, remained qualitative and susceptible to interpretation errors",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Version 18 further refined this model by incorporating Tool-Augmented Auditing and Structured JSON State Exchange",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The key improvement in v18 is the empowerment of the Auditor agent with a `citation_retriever` tool. This tool enables programmatic verification of claims against source documents, transforming the audit from a qualitative review into a verifiable, programmatic process",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This addresses the previous vulnerability of relying on the LLM to interpret and compare unstructured text for fact-checking",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Furthermore, v18 replaced the fragile Markdown-based state passing with structured JSON objects",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The Planning graph now produces `plan.json` and the Evaluation graph produces `evaluation.json`",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured state exchange ensures reliable, machine-readable data for the Supervisor's control flow, eliminating the brittleness of string parsing previously employed",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "These enhancements in v18 create a more robust, verifiable, and scalable agentic research system.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The v18 architecture represents a significant advancement in creating a robust and verifiable agentic research system.  It builds upon the v17 Teacher-Student model by incorporating two key enhancements: Tool-Augmented Auditing and Structured JSON State Exchange.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The core of the v18 system revolves around the interaction between the Student and Teacher agents. The Student agent, a low-temperature LLM, is responsible for generating both the initial plan via the `planning_graph` and the cited artifact using the `synthesis_graph`.",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "The Teacher agent, a low-temperature LLM from a different model family, then evaluates the Student's work.",
+      "citation_tag": "[Source: Technical Research Report v17.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This evaluation is no longer a qualitative review as in previous versions, but a programmatic verification process.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This programmatic verification is achieved through Tool-Augmented Auditing.  Instead of simply comparing text for factual accuracy, the Auditor (Teacher) now uses a `citation_retriever` tool.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This tool allows the Auditor to directly access and verify claims against the original source documents, eliminating the potential for interpretation errors and hallucinations that plagued earlier versions.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "Further enhancing the robustness of the system is the use of Structured JSON State Exchange.  Communication between the different graphs (Planning, Synthesis, and Evaluation) now occurs through structured JSON objects (`plan.json` and `evaluation.json`).",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured data exchange replaces the previous reliance on unstructured Markdown files, eliminating the fragility of string parsing and ensuring reliable control flow for the Supervisor agent.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    },
+    {
+      "claim": "This structured approach contributes to the overall scalability and verifiability of the system.",
+      "citation_tag": "[Source: Technical Research Report v18.docx]",
+      "verification_status": "PASS"
+    }
+  ]
+}
+2025-06-16 08:36:40,931 - ResearchAgentV2 - INFO - EVALUATION phase complete.
+2025-06-16 08:36:41,023 - ResearchAgentV2 - INFO - Initializing session state.
+2025-06-16 08:36:41,024 - ResearchAgentV2 - INFO - --- Streamlit App Started / Reran ---

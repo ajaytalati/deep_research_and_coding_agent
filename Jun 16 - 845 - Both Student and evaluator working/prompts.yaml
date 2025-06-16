@@ -1,0 +1,162 @@
+# prompts.yaml
+# v3.5: Corrected KeyError. Separated high-level tasks from node instructions.
+
+# --- High-Level Task Definitions ---
+# The supervisor will pass ONE of these as the {user_prompt} to the agent.
+# This uses the user's proven, detailed prompt structure.
+
+research_generation_task: >
+  **Primary Goal:** Produce a formal, technical research report that documents the complete conceptual evolution of the agentic system, from its inception in v2 to its final proposed state in v18.
+
+  **Key Content Directives:**
+  - **Comprehensive Chronology:** The report's structure MUST cover the entire version history. Your plan should have distinct sections for the major architectural epochs:
+    1.  Initial RAG and Agentic Loop (v2-v6)
+    2.  The Constitutional Multi-Agent System (v7-v9)
+    3.  The State-Passing & Design-Specification Workflow (v10-v12)
+    4.  The Plan-Synthesize-Evaluate Framework (v13-v16)
+    5.  The Professional-Grade Teacher-Student Model (v17-v18)
+  - **Emphasis on Later Versions:** While covering the full history, you must dedicate more detail and analysis to the more complex later architectures (v13-v18), as these represent the most significant intellectual contributions.
+  - **Detailed Final Synthesis:** The "Conclusion" section of the report must be a detailed synthesis of the final v18 architecture. It should not be a brief summary. It must meticulously describe the complete, professional-grade Teacher-Student system, explaining how Tool-Augmented Auditing and Structured JSON State Exchange work together to create a robust and verifiable agent. This section should draw supporting concepts from v16 and v17 as necessary.
+
+  **Crucial Constraint:**
+  - You MUST ONLY describe components and processes explicitly defined in the knowledge base. Do not hallucinate.
+
+design_spec_generation_task: >
+  **Primary Goal:** Produce a formal Technical Design Specification.
+
+  **Process:**
+  1.  **Analyze:** First, analyze the Research Report provided in the context.
+  2.  **Plan:** Formulate a plan for creating the design spec, with sections for each required component.
+  3.  **Synthesize:** Write the content for each section of the design specification.
+
+  **Content Requirements:**
+  - The spec must be the blueprint for implementation.
+  - It must include: Architectural Overview, Module & Component Specifications, Data Flow Logic, and Validation Test Cases.
+
+code_generation_task: >
+  **Primary Goal:** Implement the system in Python code.
+  
+  **Process:**
+  1.  **Analyze:** Analyze the Technical Design Specification provided in the context.
+  2.  **Plan:** Formulate a plan for implementing the specified `agent_core.py` and `supervisor.py` files.
+  3.  **Synthesize:** Write the Python code for each file.
+
+  **Content Requirements:**
+  - The output must be a modular design with two complete, distinct Python code blocks labeled '### AGENT_CORE.PY ###' and '### SUPERVISOR.PY ###'.
+  - The code must be an exact implementation of the design spec.
+
+# --- Node-Level Prompts (Instructions for agent nodes) ---
+
+# --- Prompts for the Planning Graph (Student) ---
+
+create_plan_prompt: >
+  Analyze the user's high-level request and the provided context. Your task is to create a structured **table of contents** for the requested artifact, formatted as a JSON object.
+
+  **Instruction:** The plan you create should be a skeleton or outline for the **final document itself**, NOT a list of your internal process steps. For example, create sections like "1.0 Introduction", "2.0 Early Architectures (v2-v6)", "3.0 The Constitutional Multi-Agent System (v7-v9)", etc.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the following schema. Do not include any other text, comments, or markdown formatting.
+  
+  JSON Schema:
+  {{
+    "title": "<A concise title for the proposed artifact>",
+    "plan_items": [
+      {{
+        "section_id": "<e.g., 1.0>",
+        "title": "<Title of the first section>",
+        "description": "<A one-sentence description of what this section will cover.>"
+      }},
+      {{
+        "section_id": "<e.g., 2.0>",
+        "title": "<Title of the second section>",
+        "description": "<A one-sentence description of what this section will cover.>"
+      }}
+    ]
+  }}
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+  
+  ### USER REQUEST:
+  {user_prompt}
+
+
+# --- Prompts for the Synthesis Graph (Student) ---
+
+synthesis_step_prompt: >
+  Your task is to generate the content for ONLY the following single item from the overall plan.
+  Use the full plan, user request, and the provided context to ensure your output is relevant and grounded.
+  
+  **CRITICAL:** For every substantial claim or piece of data you synthesize from the context, you MUST include an in-line citation tag in the format `[Source: <document_name>]`. The document name must be one of the source documents provided in the context.
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+
+  ### FULL PLAN:
+  {plan_str}
+  
+  ### CURRENT PLAN ITEM TO EXECUTE:
+  {item_title} - {item_description}
+  
+  ### GENERATED CONTENT (Markdown with citations):
+
+# --- Prompts for the Evaluation Graph (Teacher) ---
+
+evaluation_prompt: >
+  You are an independent auditor. Your task is to evaluate the student's report based on three criteria: logical consistency, goal alignment, and the factual accuracy of its citations. You have access to a `citation_retriever` tool to verify claims.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object conforming to the schema below. For the `citation_audit`, you MUST use the `citation_retriever` tool for each citation found in the report.
+
+  JSON Schema:
+  {{
+    "overall_consistency_score": <A float from 0.0 to 1.0 rating the logical flow>,
+    "consistency_notes": "<Your detailed notes on the report's coherence and structure>",
+    "goal_alignment_check": "<'PASS' or 'FAIL'>",
+    "goal_alignment_notes": "<Notes on whether the report fulfills the original user request>",
+    "citation_audit": [
+      {{
+        "claim": "<The sentence or claim made in the report>",
+        "citation_tag": "<The exact [Source: ...] tag from the report>",
+        "verification_status": "<'PASS' or 'FAIL' based on the tool's output>"
+      }}
+    ]
+  }}
+
+  ### ORIGINAL USER REQUEST:
+  {user_prompt}
+  
+  ### STUDENT'S REPORT TO EVALUATE:
+  {output}
+
+# --- NEW PROMPT FOR THE v2 EVALUATION GRAPH ---
+evaluation_prompt_v2: >
+  You are an independent auditor. Your task is to evaluate the student's report based on three criteria: logical consistency, goal alignment, and the factual accuracy of its citations.
+  
+  **PROCESS:**
+  1.  Read the student's report below.
+  2.  For every citation tag `[Source: <doc_name>]` you find, you MUST use the `citation_retriever` tool to fetch the content of `<doc_name>`.
+  3.  Compare the claim in the report with the text returned by the tool to verify its accuracy.
+  4.  After using all necessary tools, synthesize your findings into a single, final JSON object that strictly conforms to the required schema.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object. Do not add any text before or after the JSON.
+
+  JSON Schema:
+  {{
+    "overall_consistency_score": <A float from 0.0 to 1.0 rating the logical flow>,
+    "consistency_notes": "<Your detailed notes on the report's coherence and structure>",
+    "goal_alignment_check": "<'PASS' or 'FAIL'>",
+    "goal_alignment_notes": "<Notes on whether the report fulfills the original user request>",
+    "citation_audit": [
+      {{
+        "claim": "<The sentence or claim made in the report>",
+        "citation_tag": "<The exact [Source: ...] tag from the report>",
+        "verification_status": "<'PASS' or 'FAIL' based on the tool's output>"
+      }}
+    ]
+  }}
+
+  ### ORIGINAL USER REQUEST:
+  {user_prompt}
+  
+  ### STUDENT'S REPORT TO EVALUATE:
+  {output}
+
