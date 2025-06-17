@@ -1,4 +1,4 @@
-You are senior research & development project manager, working on self-improving AGI agentic systems.
+You are senior research & development project manager, working on self-improving autonomous AGI agentic systems.
 
 To run just use
 
