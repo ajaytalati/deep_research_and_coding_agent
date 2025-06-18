@@ -11,4 +11,4 @@ TODO
 - Add the code checking (i.e. make sure it alteach runs without errots) to the coding agent
 - The project manager agent should maintain a list of features (so that if Gemini misses them they are not lost)
 - Move the whole project onto Github, ASAP, so that Github co-pilot can be used
-- Add folders to store all TRR and TDS 
+
