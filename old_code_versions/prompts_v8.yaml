@@ -1,0 +1,195 @@
+# prompts_v8.yaml
+# This file is fully reconciled with all technical specifications up to v8.0.
+# It includes prompts for the Research, Design, and Coding agents.
+
+# --- High-Level Task Definitions ---
+research_generation_task: >
+  # This task is now focused on the next evolution after the Coding Agent.
+  **Primary Goal:** Produce a formal technical research report proposing an architecture for a **Master Project Manager (PM) Agent**.
+
+  **Methodology:**
+  1.  **Analyze Existing System:** Synthesize the current architecture, which includes a complete Research -> Design -> Coding agent pipeline, communicating via structured JSON artifacts.
+  2.  **Research Autonomous Agents:** Based on the knowledge base, research the concepts of executive function, meta-cognition, and autonomous goal-setting in agentic systems.
+  3.  **Propose PM Agent Architecture:** Propose a high-level architecture for a Master PM Agent that can:
+      - Observe the outputs of the full pipeline (reports, specs, code, test results).
+      - Reason about the project's state.
+      - Autonomously generate the next `research_generation_task` to continue the development loop without human intervention.
+
+# --- Node-Level Prompts ---
+
+# --- Prompts for Research Agent: Planning, Synthesis, Evaluation ---
+create_plan_prompt: >
+  Analyze the user's high-level request and the provided context. Your task is to create a structured **table of contents** for the requested artifact, formatted as a JSON object.
+  **Instruction:** The plan you create should be a skeleton or outline for the **final document itself**, NOT a list of your internal process steps.
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the schema below. Do not include any other text, comments, or markdown formatting.
+  JSON Schema:
+  {{
+    "title": "<A concise title for the proposed artifact>",
+    "plan_items": [
+      {{"section_id": "<e.g., 1.0>", "title": "<Title of the first section>", "description": "<A one-sentence description of what this section will cover.>"}}
+    ]
+  }}
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+  ### USER REQUEST:
+  {user_prompt}
+
+synthesis_step_prompt: >
+  Your task is to generate the content for ONLY the following single item from the overall plan. Use the full plan, user request, and the provided context to ensure your output is relevant and grounded.
+  **CRITICAL:** For every substantial claim or piece of data you synthesize from the context, you MUST include an in-line citation tag in the format `[Source: <document_name>]`.
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+  ### FULL PLAN:
+  {plan_str}
+  ### CURRENT PLAN ITEM TO EXECUTE:
+  {item_title} - {item_description}
+  ### GENERATED CONTENT (Markdown with citations):
+
+# --- PROMPT ADDED TO ALIGN WITH TDS v5.0 ---
+create_a2a_synthesis_prompt: >
+  You are a metadata and systems analysis expert. Your task is to read the following final research report and distill its core conceptual and architectural information into a structured JSON object.
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the schema below. Do not add any other text or markdown.
+  JSON Schema:
+  {{
+    "metadata": {{"report_version": "<The version of the system being described, e.g., 20.0>", "generation_date": "{current_date}", "primary_sources": ["<List of key source documents mentioned in the report>"]}},
+    "high_level_summary": "<A one-sentence summary of the system's final architecture>",
+    "key_architectural_principles": ["<A list of the core design principles>"],
+    "system_components": [{{"name": "<Component Name>", "description": "<A one-sentence description>"}}],
+    "workflow_stages": ["<A list of the main workflow phases>"],
+    "state_management": {{"definition": "<The name of the state object>", "keys": ["<A list of the most important keys>"]}},
+    "required_tools": [{{"name": "<Tool Name>", "description": "<A one-sentence description>"}}]
+  }}
+  ### FINAL RESEARCH REPORT TO ANALYZE:
+  {final_report_text}
+
+evaluation_prompt_v2: >
+  You are an independent auditor. Your task is to evaluate the student's report based on three criteria: logical consistency, goal alignment, and the factual accuracy of its citations.
+  **PROCESS:**
+  1. Read the student's report below.
+  2. For every citation tag `[Source: <doc_name>][#]` you find, you MUST use the `citation_retriever` tool to fetch the content of `<doc_name>`.
+  3. Compare the claim in the report with the text returned by the tool to verify its accuracy.
+  4. After using all necessary tools, synthesize your findings into a single, final JSON object that strictly conforms to the required schema.
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object. Do not add any text before or after the JSON.
+  JSON Schema:
+  {{
+    "overall_consistency_score": <float>,
+    "consistency_notes": "<notes>",
+    "goal_alignment_check": "<'PASS' or 'FAIL'>",
+    "goal_alignment_notes": "<notes>",
+    "citation_audit": [
+      {{"claim": "<claim>", "citation_tag": "<tag>", "verification_status": "<'PASS' or 'FAIL'>"}}
+    ]
+  }}
+  ### ORIGINAL USER REQUEST:
+  {user_prompt}
+  ### STUDENT'S REPORT TO EVALUATE:
+  {output}
+
+# --- PROMPTS ADDED FOR DESIGN AGENT (TDS v5.1 & v6.0) ---
+create_design_spec_prompt: >
+  You are an expert Systems Architect. Your task is to create a formal Technical Design Specification (TDS) based on the conceptual information provided in the research synthesis JSON below.
+  Methodology: Analyze the `high_level_summary`, `key_architectural_principles`, and `system_components` to understand the goal. Translate these concepts into a concrete implementation plan. The output must be a well-structured Markdown document with clear sections for any required changes to state management, computational graphs, prompts, and the supervisor UI.
+  CRITICAL: Your output must be a Markdown document.
+  ### RESEARCH SYNTHESIS (JSON):
+  ```json
+  {research_synthesis_json}
+  ```
+  ### TECHNICAL DESIGN SPECIFICATION (Markdown):
+
+create_design_synthesis_prompt: >
+  You are an expert software architect. Your task is to read the following Technical Design Specification and distill its implementation plan into a structured JSON "work order" for a Coding Agent.
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the schema below. Do not add any other text or markdown.
+  JSON Schema:
+  {{
+    "metadata": {{"design_spec_version": "<Version of the design spec>", "generation_date": "{current_date}"}},
+    "high_level_goal": "<A one-sentence summary of the feature to be implemented.>",
+    "file_modifications": [
+      {{
+        "file_path": "<Relative path to the file to be modified>",
+        "changes": ["<Use keywords ADD_CLASS, ADD_FUNCTION, ADD_KEY, MODIFY_CLASS, MODIFY_FUNCTION, or DELETE_FUNCTION followed by a brief, precise description of the change.>"]
+      }}
+    ],
+    "new_files": [
+      {{
+        "file_path": "<Relative path of the new file to create>",
+        "description": "<A brief description of the new file's purpose.>"
+      }}
+    ]
+  }}
+  ### TECHNICAL DESIGN SPECIFICATION TO ANALYZE:
+  {design_spec_md}
+
+# --- Prompts for the Coding Agent (TDS v7.0 & v8.0) ---
+create_coding_plan_prompt: >
+  You are an expert software engineer. Your task is to create a high-level, step-by-step coding plan based on the JSON work order below.
+  **CRITICAL:** The plan should focus on which files to modify and the goal of each modification. DO NOT generate the code content itself in this step. The output must be a valid JSON object.
+
+  ### CODING WORK ORDER (JSON):
+  ```json
+  {design_synthesis_json}
+  ```
+  
+  ### YOUR CODING PLAN (JSON):
+  ```json
+  {{
+    "steps": [
+      {{
+        "description": "A summary of the action, e.g., 'Add a new dashboard display function to supervisor.py'",
+        "file_path": "src/supervisor.py"
+      }},
+      {{
+        "description": "Add a new key, 'test_results', to the GraphState TypedDict in agent_core.py",
+        "file_path": "src/agent_core.py"
+      }}
+    ]
+  }}
+  ```
+
+generate_file_content_prompt: >
+  You are an expert AI programmer. Your task is to modify the provided file content based on the given instruction.
+  **CRITICAL:** Your output MUST be ONLY the new, complete, and valid code for the entire file. Do not add any commentary, explanations, or markdown formatting.
+
+  ### INSTRUCTION:
+  {instruction}
+
+  ### ORIGINAL FILE CONTENT:
+  ```python
+  {original_content}
+  ```
+
+  ### NEW, MODIFIED FILE CONTENT:
+
+create_coding_report_prompt: >
+  You are a technical writer and software release manager. Your task is to take the final proposed content for a set of files and create a structured JSON execution report.
+
+  **CRITICAL INSTRUCTIONS:**
+  1. Your entire output MUST be a single, valid JSON object.
+  2. The `content` field for each file must be a single, JSON-escaped string.
+  3. Base the `summary` on the overall changes reflected in the provided file contents.
+
+  ### FINAL PROPOSED FILE CONTENTS (JSON):
+  ```json
+  {final_file_contents_json}
+  ```
+
+  ### YOUR CODING EXECUTION REPORT (JSON):
+  ```json
+  {{
+    "metadata": {{
+      "report_version": "8.0",
+      "generation_date": "{current_date}",
+      "source_design_spec_version": "{design_spec_version}"
+    }},
+    "summary": "<A brief, one-sentence summary of the overall changes implemented.>",
+    "final_code_artifacts": [
+      {{
+        "file_path": "<The path of the first file, e.g., 'src/supervisor_v8.py'>",
+        "content": "<The complete, JSON-escaped string content of the first file>"
+      }},
+      {{
+        "file_path": "<The path of the second file, e.g., 'src/agent_core_v8.py'>",
+        "content": "<The complete, JSON-escaped string content of the second file>"
+      }}
+    ]
+  }}
+  

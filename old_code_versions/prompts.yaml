@@ -1,0 +1,111 @@
+# prompts.yaml
+# v2.4: Final, robust version. Reverted create_plan_prompt to fix KeyError.
+
+# --- High-Level Task Definitions ---
+research_generation_task: >
+  **Primary Goal:** Produce a formal technical research report that provides a definitive overview of the project's current stable architecture and details the next proposed enhancement based *only* on the provided consolidated reports and latest specifications.
+
+  **Key Content Directives:**
+  - **The "As-Built" System:** The primary section of the report must synthesize the architecture of the stable, implemented system. This analysis should be based principally on the **Consolidated Technical Research Report v1.0**. Your description must cover the key architectural pillars of the final system, including:
+    * The **Plan-Synthesize-Evaluate** workflow.
+    * The simplified **Teacher-Student model** for independent auditing.
+    * **Tool-Augmented Auditing** using a `citation_retriever` to programmatically verify claims.
+    * The robust **single-call evaluation graph** that enhances system resilience.
+
+  - **The Next Architectural Enhancement:** Following the overview of the stable system, the report must describe the next feature to be developed. This analysis must be based on **Technical Research Report v20.0**. It should clearly explain:
+    * The limitation of the current human-readable Markdown output for agent-to-agent communication.
+    * The proposed solution: generating a second, structured `research_synthesis.json` artifact.
+    * The purpose of this A2A artifact as a clean, unambiguous API contract between agents.
+
+  - **Conclusion: The Future R&D Pipeline:** The report's conclusion should synthesize the two prior sections, explaining how the new A2A enhancement is the final conceptual step required to transform the system into a fully automated, end-to-end software development pipeline.
+
+  **Crucial Constraint:**
+  - You MUST ONLY describe components and processes explicitly defined in the provided knowledge base. Do not attempt to reconstruct a version history or hallucinate details not present in the consolidated documents.
+  
+# --- Node-Level Prompts (Instructions for agent nodes) ---
+
+# --- Prompts for the Planning Graph (Student) ---
+create_plan_prompt: >
+  You are a technical analyst and system architect. Your task is to analyze the user's request and the provided context to create a structured **table of contents** for a technical report, formatted as a JSON object.
+
+  **Methodology:**
+  1.  First, analyze the **Consolidated Technical Research Report** and **Consolidated Technical Design Specification** to understand the complete, "as-built" v2 architecture. This covers the evolution to a tool-augmented Teacher-Student model.
+  2.  Next, analyze **Technical Research Report v20.0** and **Technical Design Specification v5.0** to identify the latest proposed architectural enhancement (the Agent-to-Agent artifact).
+  3.  Structure the plan to first describe the established system and its key principles, and then introduce the new A2A enhancement as the next logical step. The plan should conclude by explaining how this new feature enables a future R&D pipeline.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the following schema. Do not include any other text, comments, or markdown formatting.
+  
+  JSON Schema:
+  {{
+    "title": "<A concise title for the proposed artifact>",
+    "plan_items": [
+      {{
+        "section_id": "<e.g., 1.0>",
+        "title": "<Title of the first section>",
+        "description": "<A one-sentence description of what this section will cover.>"
+      }},
+      {{
+        "section_id": "<e.g., 2.0>",
+        "title": "<Title of the second section>",
+        "description": "<A one-sentence description of what this section will cover.>"
+      }}
+    ]
+  }}
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+  
+  ### USER REQUEST:
+  {user_prompt}
+
+# --- Prompts for the Synthesis Graph (Student) ---
+synthesis_step_prompt: >
+  Your task is to generate the content for ONLY the following single item from the overall plan.
+  Use the full plan, user request, and the provided context to ensure your output is relevant and grounded.
+  
+  **CRITICAL:** For every substantial claim or piece of data you synthesize from the context, you MUST include an in-line citation tag in the format `[Source: <document_name>]`.
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+
+  ### FULL PLAN:
+  {plan_str}
+  
+  ### CURRENT PLAN ITEM TO EXECUTE:
+  {item_title} - {item_description}
+  
+  ### GENERATED CONTENT (Markdown with citations):
+
+# --- Prompts for the Evaluation Graph (Teacher) ---
+evaluation_prompt_v2: >
+  You are an independent auditor. Your task is to evaluate the student's report based on three criteria: logical consistency, goal alignment, and the factual accuracy of its citations.
+  
+  **PROCESS:**
+  1.  Read the student's report below.
+  2.  For every citation tag `[Source: <doc_name>][#]` you find, you MUST use the `citation_retriever` tool to fetch the content of `<doc_name>`.
+  3.  Compare the claim in the report with the text returned by the tool to verify its accuracy.
+  4.  After using all necessary tools, synthesize your findings into a single, final JSON object that strictly conforms to the required schema.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object. Do not add any text before or after the JSON.
+
+  JSON Schema:
+  {{
+    "overall_consistency_score": <A float from 0.0 to 1.0 rating the logical flow>,
+    "consistency_notes": "<Your detailed notes on the report's coherence and structure>",
+    "goal_alignment_check": "<'PASS' or 'FAIL'>",
+    "goal_alignment_notes": "<Notes on whether the report fulfills the original user request>",
+    "citation_audit": [
+      {{
+        "claim": "<The sentence or claim made in the report>",
+        "citation_tag": "<The exact [Source: ...][#] tag from the report>",
+        "verification_status": "<'PASS' or 'FAIL' based on the tool's output>"
+      }}
+    ]
+  }}
+
+  ### ORIGINAL USER REQUEST:
+  {user_prompt}
+  
+  ### STUDENT'S REPORT TO EVALUATE:
+  {output}
+

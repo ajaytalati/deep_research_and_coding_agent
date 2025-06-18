@@ -1,0 +1,135 @@
+# prompts_v4.yaml
+# v4.0: Implements TDS v5.1 by adding the create_design_spec_prompt.
+
+# --- High-Level Task Definitions ---
+research_generation_task: >
+  **Primary Goal:** Produce a formal technical research report that provides a definitive overview of the project's current stable architecture and details the next proposed enhancement based *only* on the provided consolidated reports and latest specifications.
+
+  **Key Content Directives:**
+  - **The "As-Built" System:** Synthesize the architecture of the stable, implemented system based principally on the **Consolidated Technical Research Report v1.0**.
+  - **The Next Architectural Enhancement:** Describe the next feature to be developed based on **Technical Research Report v20.0**, which is the structured `research_synthesis.json` artifact.
+  - **Conclusion: The Future R&D Pipeline:** Explain how the new A2A enhancement enables a fully automated, end-to-end software development pipeline.
+
+  **Crucial Constraint:**
+  - You MUST ONLY describe components and processes explicitly defined in the provided knowledge base.
+
+# --- Node-Level Prompts (Instructions for agent nodes) ---
+
+# --- Prompts for the Planning Graph (Student) ---
+create_plan_prompt: >
+  Analyze the user's high-level request and the provided context. Your task is to create a structured **table of contents** for the requested artifact, formatted as a JSON object.
+
+  **Instruction:** The plan you create should be a skeleton or outline for the **final document itself**, NOT a list of your internal process steps.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the following schema. Do not include any other text, comments, or markdown formatting.
+  
+  JSON Schema:
+  {{
+    "title": "<A concise title for the proposed artifact>",
+    "plan_items": [
+      {{
+        "section_id": "<e.g., 1.0>",
+        "title": "<Title of the first section>",
+        "description": "<A one-sentence description of what this section will cover.>"
+      }}
+    ]
+  }}
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+  
+  ### USER REQUEST:
+  {user_prompt}
+
+# --- Prompts for the Synthesis Graph (Student) ---
+synthesis_step_prompt: >
+  Your task is to generate the content for ONLY the following single item from the overall plan.
+  Use the full plan, user request, and the provided context to ensure your output is relevant and grounded.
+  
+  **CRITICAL:** For every substantial claim or piece of data you synthesize from the context, you MUST include an in-line citation tag in the format `[Source: <document_name>]`.
+
+  ### CONTEXT FROM KNOWLEDGE BASE:
+  {context}
+
+  ### FULL PLAN:
+  {plan_str}
+  
+  ### CURRENT PLAN ITEM TO EXECUTE:
+  {item_title} - {item_description}
+  
+  ### GENERATED CONTENT (Markdown with citations):
+
+create_a2a_synthesis_prompt: >
+  You are a metadata and systems analysis expert. Your task is to read the following final research report and distill its core conceptual and architectural information into a structured JSON object.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object that conforms to the schema below. Do not add any other text, comments, or markdown formatting.
+
+  JSON Schema:
+  {{
+    "metadata": {{
+      "report_version": "<The version of the system being described, e.g., 20.0>",
+      "generation_date": "{current_date}",
+      "primary_sources": ["<List of key source documents mentioned in the report>"]
+    }},
+    "high_level_summary": "<A one-sentence summary of the system's final architecture>",
+    "key_architectural_principles": ["<A list of the core design principles>"],
+    "system_components": [{{"name": "<Component Name>", "description": "<A one-sentence description>"}}],
+    "workflow_stages": ["<A list of the main workflow phases>"],
+    "state_management": {{"definition": "<The name of the state object>", "keys": ["<A list of the most important keys>"]}},
+    "required_tools": [{{"name": "<Tool Name>", "description": "<A one-sentence description>"}}]
+  }}
+
+  ### FINAL RESEARCH REPORT TO ANALYZE:
+  {final_report_text}
+
+# --- Prompts for the Design Agent (TDS v5.1) ---
+create_design_spec_prompt: >
+  You are an expert Systems Architect. Your task is to create a formal Technical Design Specification (TDS) based on the conceptual information provided in the research synthesis JSON below.
+
+  **Methodology:**
+  1.  Analyze the `high_level_summary`, `key_architectural_principles`, and `system_components` to understand the goal.
+  2.  Translate these concepts into a concrete implementation plan.
+  3.  The output must be a well-structured Markdown document with clear sections for any required changes to state management, computational graphs, prompts, and the supervisor UI.
+
+  **CRITICAL:** Your output must be a Markdown document.
+
+  ### RESEARCH SYNTHESIS (JSON):
+  ```json
+  {research_synthesis_json}
+  ```
+
+  ### TECHNICAL DESIGN SPECIFICATION (Markdown):
+
+# --- Prompts for the Evaluation Graph (Teacher) ---
+evaluation_prompt_v2: >
+  You are an independent auditor. Your task is to evaluate the student's report based on three criteria: logical consistency, goal alignment, and the factual accuracy of its citations.
+  
+  **PROCESS:**
+  1.  Read the student's report below.
+  2.  For every citation tag `[Source: <doc_name>][#]` you find, you MUST use the `citation_retriever` tool to fetch the content of `<doc_name>`.
+  3.  Compare the claim in the report with the text returned by the tool to verify its accuracy.
+  4.  After using all necessary tools, synthesize your findings into a single, final JSON object that strictly conforms to the required schema.
+
+  **CRITICAL:** Your entire output MUST be a single, valid JSON object. Do not add any text before or after the JSON.
+
+  JSON Schema:
+  {{
+    "overall_consistency_score": <A float from 0.0 to 1.0 rating the logical flow>,
+    "consistency_notes": "<Your detailed notes on the report's coherence and structure>",
+    "goal_alignment_check": "<'PASS' or 'FAIL'>",
+    "goal_alignment_notes": "<Notes on whether the report fulfills the original user request>",
+    "citation_audit": [
+      {{
+        "claim": "<The sentence or claim made in the report>",
+        "citation_tag": "<The exact [Source: ...][#] tag from the report>",
+        "verification_status": "<'PASS' or 'FAIL' based on the tool's output>"
+      }}
+    ]
+  }}
+
+  ### ORIGINAL USER REQUEST:
+  {user_prompt}
+  
+  ### STUDENT'S REPORT TO EVALUATE:
+  {output}
+
