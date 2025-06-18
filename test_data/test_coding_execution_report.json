@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "report_version": "8.0",
+    "generation_date": "2025-06-18",
+    "source_design_spec_version": "0.1-test"
+  },
+  "summary": "This release implements a simple \"Hello, World!\" program in Python.",
+  "final_code_artifacts": [
+    {
+      "file_path": "hello.py",
+      "content": "print(\"Hello, World!\")"
+    }
+  ]
+}
+

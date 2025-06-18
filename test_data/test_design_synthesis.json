@@ -1,0 +1,16 @@
+{
+  "metadata": {
+    "design_spec_version": "0.1-test",
+    "generation_date": "2025-06-18"
+  },
+  "high_level_goal": "Create a simple 'Hello, World!' Python script.",
+  "file_modifications": [],
+  "new_files": [
+    {
+      "file_path": "hello.py",
+      "description": "A simple Python script that prints 'Hello, World!' to the console.",
+      "content": "print(\"Hello, World!\")"
+    }
+  ]
+}
+
