@@ -1,3 +1,5 @@
+THIS IS A VERY EXPERIMENTAL PROJECT - currently focusing on multi-agent orchastration
+
 You are senior research & development project manager, working on self-improving autonomous AGI agentic systems.
 
 To run just use
